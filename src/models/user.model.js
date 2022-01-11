@@ -1,6 +1,8 @@
 const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
 const validator = require('validator');
+var jwt = require('jsonwebtoken');
+const SecretKeys = require('../secret-keys');
 
 const userSchema = new mongoose.Schema(
     {
@@ -115,6 +117,18 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
+// generates jwt
+userSchema.methods.generateAuthToken = async function () {
+    const user = this;
+    const token = jwt.sign({ _id: user._id.toString() }, SecretKeys.JWT_SECRET);
+
+    user.tokens.push({ token });
+
+    await user.save();
+
+    return token;
+};
 
 const User = new mongoose.model('User', userSchema);
 
