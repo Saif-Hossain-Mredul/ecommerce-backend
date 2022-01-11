@@ -3,6 +3,7 @@ const User = require('../../models/user.model');
 
 const userRouter = express.Router();
 
+// creates new user
 userRouter.post('/users/createUser', async (req, res) => {
     const { email, password } = req.body;
 
@@ -17,10 +18,11 @@ userRouter.post('/users/createUser', async (req, res) => {
         });
 
         await user.save();
+        const token = await user.generateAuthToken();
 
-        res.status(201).send(user);
+        res.status(201).send({ user, token });
     } catch (e) {
-        res.status(409).send();
+        res.status(409).send(e.message);
     }
 });
 
