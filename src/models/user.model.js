@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema(
                 },
             },
         ],
+        profilePicture: { type: Buffer },
         inCart: [
             {
                 productId: {
@@ -83,6 +84,17 @@ const userSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
+
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject();
+
+    delete userObject.tokens;
+    delete userObject.password;
+    delete userObject.profilePicture;
+
+    return userObject;
+};
 
 const User = new mongoose.model('User', userSchema);
 
