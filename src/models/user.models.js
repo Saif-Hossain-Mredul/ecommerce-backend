@@ -51,6 +51,10 @@ const userSchema = new mongoose.Schema(
                     type: Date,
                     default: Date.now,
                 },
+                updatedAt: {
+                    type: Date,
+                    default: Date.now,
+                },
             },
         ],
         purchasedProducts: [
@@ -79,3 +83,7 @@ const userSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
+
+const User = new mongoose.model('User', userSchema);
+
+module.exports = User;
