@@ -4,7 +4,7 @@ const User = require('../../models/user.model');
 const userRouter = express.Router();
 
 // creates new user
-userRouter.post('/users/createUser', async (req, res) => {
+userRouter.post('/sign-up', async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -26,4 +26,16 @@ userRouter.post('/users/createUser', async (req, res) => {
     }
 });
 
+// sign in route
+userRouter.post('/sign-in', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findAndLoginByCredentials({ email, password });
+        const token = await user.generateAuthToken();
+
+        res.send({ user, token });
+    } catch (e) {
+        res.status(401).send(e.message);
+    }
+});
 module.exports = userRouter;
