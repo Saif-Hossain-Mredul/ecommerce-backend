@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const userSchema = new mongoose.Schema(
     {
@@ -9,14 +10,21 @@ const userSchema = new mongoose.Schema(
         },
         email: {
             type: String,
-            required: true,
             unique: true,
             trim: true,
+            validate: (email) => {
+                if (!validator.isEmail(email))
+                    throw new Error('Email is not valid.');
+            },
         },
         password: {
             type: String,
             required: true,
             trim: true,
+            validate: (password) => {
+                if (password.length < 8)
+                    throw new Error('Password length must be greater than 8');
+            },
         },
         shippingAddress: [
             {
