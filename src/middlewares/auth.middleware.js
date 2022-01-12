@@ -4,7 +4,7 @@ const { JWT_SECRET } = require('../secret-keys');
 
 const auth = async (req, res, next) => {
     try {
-        const token = req.headers('Authorization').replace('Bearer ', '');
+        const token = req.headers.authorization.replace('Bearer ', '');
         const decodedToken = jwt.decode(token, JWT_SECRET);
 
         const user = await User.findOne({

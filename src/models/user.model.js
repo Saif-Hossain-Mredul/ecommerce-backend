@@ -134,10 +134,14 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.methods.deleteAuthToken = async function (token) {
     const user = this;
 
-    user.tokens = user.tokens.filter((savedToken) => savedToken !== token); 
+    user.tokens = user.tokens.filter((savedToken) => {
+        return savedToken.token !== token;
+    });
 
     await user.save();
-}
+
+    return;
+};
 
 // find an user and logs in
 userSchema.statics.findAndLoginByCredentials = async ({ email, password }) => {
