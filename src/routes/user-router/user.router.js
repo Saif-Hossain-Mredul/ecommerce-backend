@@ -1,6 +1,8 @@
 const express = require('express');
 const User = require('../../models/user.model');
 
+const auth = require('../../middlewares/auth.middleware');
+
 const userRouter = express.Router();
 
 // creates new user
@@ -44,7 +46,7 @@ userRouter.post('/sign-out', auth, async (req, res) => {
     const { user, token } = req;
 
     try {
-        await user.deleteAuthToken(token);
+        await user.deleteAuthToken(token); 
     } catch (e) {
         res.status(500).send();
     }

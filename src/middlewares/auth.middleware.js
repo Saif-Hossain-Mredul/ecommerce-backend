@@ -22,3 +22,5 @@ const auth = async (req, res, next) => {
         res.status(401).send(e.message);
     }
 };
+
+module.exports = auth;
