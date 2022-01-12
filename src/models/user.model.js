@@ -130,6 +130,15 @@ userSchema.methods.generateAuthToken = async function () {
     return token;
 };
 
+// delete auth token
+userSchema.methods.deleteAuthToken = async function (token) {
+    const user = this;
+
+    user.tokens = user.tokens.filter((savedToken) => savedToken !== token); 
+
+    await user.save();
+}
+
 // find an user and logs in
 userSchema.statics.findAndLoginByCredentials = async ({ email, password }) => {
     const user = await User.findOne({ email });

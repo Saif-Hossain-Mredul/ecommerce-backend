@@ -39,6 +39,15 @@ userRouter.post('/sign-in', async (req, res) => {
     }
 });
 
+// signout route
+userRouter.post('/sign-out', auth, async (req, res) => {
+    const { user, token } = req;
 
+    try {
+        await user.deleteAuthToken(token);
+    } catch (e) {
+        res.status(500).send();
+    }
+});
 
 module.exports = userRouter;
