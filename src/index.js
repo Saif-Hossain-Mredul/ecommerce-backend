@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 
 app.use(userRouter);
+app.use(productRouter);
 
 app.listen(port, () => {
     console.log('Connected to port ' + port);
