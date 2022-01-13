@@ -5,6 +5,9 @@ const productSchema = new mongoose.Schema(
         name: {
             type: String,
         },
+        category: {
+            type: String,
+        },
         description: {
             type: String,
         },
@@ -19,7 +22,7 @@ const productSchema = new mongoose.Schema(
         },
         displayImages: [
             {
-                type: Buffer,
+                image: { type: Buffer },
             },
         ],
     },
