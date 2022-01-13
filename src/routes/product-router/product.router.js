@@ -1,6 +1,5 @@
 const express = require('express');
 const Product = require('../../models/product.model');
-const userRouter = require('../user-router/user.router');
 
 const productRouter = express.Router();
 
@@ -16,7 +15,7 @@ productRouter.post('/add-product', async (req, res) => {
     }
 });
 
-userRouter.patch('/product/:id', async (req, res) => {
+productRouter.patch('/product/:id', async (req, res) => {
     const requestedUpdates = Object.keys(req.body);
     const allowedUpdates = [
         'name',
