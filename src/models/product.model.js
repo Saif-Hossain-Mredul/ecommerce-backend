@@ -8,6 +8,9 @@ const productSchema = new mongoose.Schema(
         category: {
             type: String,
         },
+        brand: {
+            type: String,
+        },
         description: {
             type: String,
         },
@@ -16,9 +19,11 @@ const productSchema = new mongoose.Schema(
         },
         totalPurchase: {
             type: Number,
+            default: 0
         },
         rating: {
             type: Number,
+            default: 0
         },
         displayImages: [
             {
