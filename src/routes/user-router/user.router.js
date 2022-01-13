@@ -54,4 +54,13 @@ userRouter.post('/sign-out', auth, async (req, res) => {
     }
 });
 
+//get profile
+userRouter.get('/profile', auth, async (req, res) => {
+    try {
+        res.send(req.user);
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
+
 module.exports = userRouter;
