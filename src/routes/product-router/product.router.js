@@ -1,4 +1,8 @@
 const express = require('express');
+require('../../cloudinary-configure');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const streamifier = require('streamifier');
 
 const auth = require('../../middlewares/auth.middleware');
 const Product = require('../../models/product.model');
@@ -21,11 +25,40 @@ productRouter.get('/products', auth, async (req, res) => {
             rating: 'desc',
         })
         .limit(5);
-    
 
     console.log(popular);
 
     res.send(popular);
 });
+
+const fileUpload = multer({
+    limits: {
+        fileSize: 1000000,
+    },
+    fileFilter(req, file, cb) {
+        cb(undefined, true);
+    },
+});
+
+productRouter.post(
+    '/image-upload/:id',
+    fileUpload.single('image'),
+    async (req, res) => {
+        console.log(req.file);
+
+        const uploadedImageStream = await cloudinary.uploader.upload_stream(
+            {
+                folder: 'watches',
+            },
+            (error, result) => {
+                console.log(error, result);
+            }
+        );
+
+        streamifier.createReadStream(req.file.buffer).pipe(uploadedImageStream);
+
+        res.send();
+    }
+);
 
 module.exports = productRouter;
