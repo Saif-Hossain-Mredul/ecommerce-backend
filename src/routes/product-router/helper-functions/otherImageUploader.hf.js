@@ -12,14 +12,14 @@ const otherImageUploader = async (files, product, imageField) => {
                 const { public_id, width, height, format, url, secure_url } =
                     result;
 
-                product.previewImage = {
+                product.otherImages.push({
                     public_id,
                     width,
                     height,
                     format,
                     url,
                     secure_url,
-                };
+                });
 
                 await product.save();
 

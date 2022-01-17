@@ -7,7 +7,7 @@ const auth = require('../../middlewares/auth.middleware');
 const Product = require('../../models/product.model');
 const previewImageUploader = require('./helper-functions/previewImageUploader.hf');
 const displayImageUploader = require('./helper-functions/displayImageUploader.hf');
-const otherImageUploader = require('./helper-functions/displayImageUploader.hf');
+const otherImageUploader = require('./helper-functions/otherImageUploader.hf');
 
 const addProduct = require('./route-functions/add-product.rf');
 const updateProduct = require('./route-functions/update-product.rf');
