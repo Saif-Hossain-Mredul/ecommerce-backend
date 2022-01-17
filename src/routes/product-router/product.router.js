@@ -40,33 +40,85 @@ const fileUpload = multer({
     },
 });
 
+const uploadCloudinary = async (req, folderPath, tags, callback) => {
+    console.log('came here');
+    const uploadedImageStream = await cloudinary.uploader.upload_stream(
+        {
+            folder: folderPath,
+            tags,
+        },
+        (error, result) => callback(error, result)
+    );
+
+    streamifier.createReadStream(req.file.buffer).pipe(uploadedImageStream);
+};
+
 productRouter.post(
     '/image-upload/:id/:imageField',
     fileUpload.single('image'),
     async (req, res) => {
-        console.log(req.query, req.params.id);
-      
+        try {
+            const { id, imageField } = req.params;
 
+            const product = await Product.findOne({ _id: id });
 
-        const product = await Product.findOne({ _id: req.params.id });
-        if(product.previewImage)
+            if (!product) throw new Error('Product not found.');
 
-        const uploadedImageStream = await cloudinary.uploader.upload_stream(
-            {
-                folder: 'watches/mens',
-                tags: ['casio', 'mens'],
-            },
-            (error, result) => {
-                console.log(error, result);
+            if (imageField === 'previewImage') {
+                // cloudinary.uploader.destroy(
+                //     product.previewImage.public_id,
+                //     (result) => {
+                //         console.log(result);
+                //     }
+                // );
+
+                const uploadResult = await uploadCloudinary(
+                    req,
+                    `watches/${product.name}/${imageField}`,
+                    [product.name, product.category, product.brand],
+                    async (error, result) => {
+                        const {
+                            public_id,
+                            width,
+                            height,
+                            format,
+                            url,
+                            secure_url,
+                        } = result;
+
+                        product.previewImage = {
+                            public_id,
+                            width,
+                            height,
+                            format,
+                            url,
+                            secure_url,
+                        };
+
+                        await product.save();
+
+                        return;
+                    }
+                );
+
+                console.log(uploadResult);
+            } else if (imageField === 'displayImages') {
+            } else if (imageField === 'otherImages') {
+            } else {
             }
-        );
 
-        cloudinary.uploader.destroy();
-
-        // streamifier.createReadStream(req.file.buffer).pipe(uploadedImageStream);
-
-        res.send();
+            res.send();
+        } catch (e) {}
     }
 );
+
+// {
+//     "public_id": "watches/mens/go757eix0lk7rfkdbnml",
+//     "width": 1000,
+//     "height": 1000,
+//     "format": "png",
+//     "url":"http://res.cloudinary.com/dcl77ditl/image/upload/v1642397856/watches/mens/go757eix0lk7rfkdbnml.png",
+//     "secure_url": "https://res.cloudinary.com/dcl77ditl/image/upload/v1642397856/watches/mens/go757eix0lk7rfkdbnml.png",
+// }
 
 module.exports = productRouter;
