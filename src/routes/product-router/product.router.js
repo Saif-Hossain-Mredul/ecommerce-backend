@@ -53,15 +53,54 @@ productRouter.post(
             if (!product) throw new Error('Product not found.');
 
             if (imageField === 'previewImage') {
-                const result = await previewImageUploader(req.files[0], product, imageField);
+                const result = await previewImageUploader(
+                    req.files[0],
+                    product,
+                    imageField
+                );
                 res.send(result);
             } else if (imageField === 'displayImages') {
-const result = await displayImageUploader()
+                const displayImageUploader = async (files, product, imageField) => {
+                    files.forEach(async (file) => {
+                        await uploadCloudinary(
+                            file,
+                            `watches/${product.name}/${imageField}`,
+                            [product.name, product.category, product.brand],
+                            async (error, result) => {
+                                if (error) throw new Error(error.message);
+                    
+                                const { public_id, width, height, format, url, secure_url } =
+                                    result;
+                    
+                                product.previewImage = {
+                                    public_id,
+                                    width,
+                                    height,
+                                    format,
+                                    url,
+                                    secure_url,
+                                };
+                    
+                                await product.save();
+                    
+                                return 'Uploaded';
+                            }
+                        );
+                    })
+
+                    return {result: 'Uploaded.'}
+                }
+                const result = await displayImageUploader(
+                    req.files,
+                    product,
+                    imageField
+                );
+
+                res.send(result)
             } else if (imageField === 'otherImages') {
             } else {
-                throw new Error('Invalid field.')
+                throw new Error('Invalid field.');
             }
-
         } catch (e) {}
     }
 );
