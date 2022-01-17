@@ -41,21 +41,29 @@ const fileUpload = multer({
 });
 
 productRouter.post(
-    '/image-upload/:id',
+    '/image-upload/:id/:imageField',
     fileUpload.single('image'),
     async (req, res) => {
-        console.log(req.file);
+        console.log(req.query, req.params.id);
+      
+
+
+        const product = await Product.findOne({ _id: req.params.id });
+        if(product.previewImage)
 
         const uploadedImageStream = await cloudinary.uploader.upload_stream(
             {
-                folder: 'watches',
+                folder: 'watches/mens',
+                tags: ['casio', 'mens'],
             },
             (error, result) => {
                 console.log(error, result);
             }
         );
 
-        streamifier.createReadStream(req.file.buffer).pipe(uploadedImageStream);
+        cloudinary.uploader.destroy();
+
+        // streamifier.createReadStream(req.file.buffer).pipe(uploadedImageStream);
 
         res.send();
     }

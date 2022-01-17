@@ -1,3 +1,4 @@
+const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema(
@@ -28,11 +29,9 @@ const productSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
-        displayImages: [
-            {
-                image: { type: Buffer },
-            },
-        ],
+        previewImage: { type: String },
+        displayImages: [{ type: String }],
+        otherImages: [{ type: String }],
     },
     {
         timestamps: true,
