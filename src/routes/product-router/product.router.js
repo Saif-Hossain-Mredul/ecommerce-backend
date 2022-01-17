@@ -6,7 +6,8 @@ const multer = require('multer');
 const auth = require('../../middlewares/auth.middleware');
 const Product = require('../../models/product.model');
 const previewImageUploader = require('./helper-functions/previewImageUploader.hf');
-const uploadCloudinary = require('./helper-functions/uploadCloudinary.hf');
+const displayImageUploader = require('./helper-functions/displayImageUploader.hf');
+const otherImageUploader = require('./helper-functions/displayImageUploader.hf');
 
 const addProduct = require('./route-functions/add-product.rf');
 const updateProduct = require('./route-functions/update-product.rf');
@@ -60,48 +61,27 @@ productRouter.post(
                 );
                 res.send(result);
             } else if (imageField === 'displayImages') {
-                const displayImageUploader = async (files, product, imageField) => {
-                    files.forEach(async (file) => {
-                        await uploadCloudinary(
-                            file,
-                            `watches/${product.name}/${imageField}`,
-                            [product.name, product.category, product.brand],
-                            async (error, result) => {
-                                if (error) throw new Error(error.message);
-                    
-                                const { public_id, width, height, format, url, secure_url } =
-                                    result;
-                    
-                                product.previewImage = {
-                                    public_id,
-                                    width,
-                                    height,
-                                    format,
-                                    url,
-                                    secure_url,
-                                };
-                    
-                                await product.save();
-                    
-                                return 'Uploaded';
-                            }
-                        );
-                    })
-
-                    return {result: 'Uploaded.'}
-                }
                 const result = await displayImageUploader(
                     req.files,
                     product,
                     imageField
                 );
 
-                res.send(result)
+                res.send(result);
             } else if (imageField === 'otherImages') {
+                const result = await otherImageUploader(
+                    req.files,
+                    product,
+                    imageField
+                );
+
+                res.send(result);
             } else {
                 throw new Error('Invalid field.');
             }
-        } catch (e) {}
+        } catch (e) {
+            res.status(409).send(e);
+        }
     }
 );
 
