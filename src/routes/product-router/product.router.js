@@ -43,7 +43,7 @@ const fileUpload = multer({
 
 productRouter.post(
     '/image-upload/:id/:imageField',
-    fileUpload.single('image'),
+    fileUpload.array('images', 5),
     async (req, res) => {
         try {
             const { id, imageField } = req.params;
@@ -53,13 +53,14 @@ productRouter.post(
             if (!product) throw new Error('Product not found.');
 
             if (imageField === 'previewImage') {
-                await previewImageUploader(req, product, imageField);
+                const result = await previewImageUploader(req, product, imageField);
+                res.send(result);
             } else if (imageField === 'displayImages') {
+
             } else if (imageField === 'otherImages') {
             } else {
             }
 
-            res.send();
         } catch (e) {}
     }
 );

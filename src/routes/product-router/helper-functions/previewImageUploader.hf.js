@@ -12,7 +12,7 @@ const previewImageUploader = async (req, product, imageField) => {
     }
 
     await uploadCloudinary(
-        req.file,
+        req.files[0],
         `watches/${product.name}/${imageField}`,
         [product.name, product.category, product.brand],
         async (error, result) => {
@@ -36,7 +36,7 @@ const previewImageUploader = async (req, product, imageField) => {
         }
     );
 
-    return;
+    return {result: 'Uploaded'};
 };
 
 module.exports = previewImageUploader;
