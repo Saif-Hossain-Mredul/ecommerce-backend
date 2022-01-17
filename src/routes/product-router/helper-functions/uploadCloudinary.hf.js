@@ -2,7 +2,6 @@ const streamifier = require('streamifier');
 const cloudinary = require('cloudinary').v2;
 
 const uploadCloudinary = async (file, folderPath, tags, callback) => {
-    console.log('came here');
     const uploadedImageStream = await cloudinary.uploader.upload_stream(
         {
             folder: folderPath,
