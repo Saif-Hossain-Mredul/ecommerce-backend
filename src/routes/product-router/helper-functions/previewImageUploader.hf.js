@@ -1,7 +1,7 @@
 const cloudinary = require('cloudinary').v2;
 const uploadCloudinary = require('./uploadCloudinary.hf');
 
-const previewImageUploader = async (req, product, imageField) => {
+const previewImageUploader = async (file, product, imageField) => {
     if (product.previewImage) {
         cloudinary.uploader.destroy(
             product.previewImage.public_id,
@@ -12,7 +12,7 @@ const previewImageUploader = async (req, product, imageField) => {
     }
 
     await uploadCloudinary(
-        req.files[0],
+        file,
         `watches/${product.name}/${imageField}`,
         [product.name, product.category, product.brand],
         async (error, result) => {

@@ -53,12 +53,13 @@ productRouter.post(
             if (!product) throw new Error('Product not found.');
 
             if (imageField === 'previewImage') {
-                const result = await previewImageUploader(req, product, imageField);
+                const result = await previewImageUploader(req.files[0], product, imageField);
                 res.send(result);
             } else if (imageField === 'displayImages') {
-
+const result = await displayImageUploader()
             } else if (imageField === 'otherImages') {
             } else {
+                throw new Error('Invalid field.')
             }
 
         } catch (e) {}
