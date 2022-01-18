@@ -26,7 +26,9 @@ productRouter.get('/products', auth, async (req, res) => {
         })
         .limit(5);
 
-    console.log(popular);
+        popular.forEach((product) => {
+            
+        })
 
     res.send(popular);
 });
@@ -40,6 +42,7 @@ const fileUpload = multer({
     },
 });
 
+// upload images for a product
 productRouter.post(
     '/image-upload/:id/:imageField',
     fileUpload.array('images', 5),

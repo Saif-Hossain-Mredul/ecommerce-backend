@@ -38,6 +38,20 @@ const productSchema = new mongoose.Schema(
     }
 );
 
+productSchema.methods.shortResponse = function () {
+    const product = this;
+
+    const productObject = product.toObject();
+
+    delete productObject.inStockQuantity;
+    delete productObject.specification;
+    delete productObject.totalPurchase;
+    delete productObject.displayImages;
+    delete productObject.otherImages;
+
+    return productObject;
+};
+
 const Product = new mongoose.model('Product', productSchema);
 
 module.exports = Product;
