@@ -24,9 +24,11 @@ const productSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
-        totalReviews: {
-            type: Number,
-            default: 0,
+        reviews: {
+            count: { type: Number, default: 0 },
+            allReviews: [
+                { type: mongoose.Schema.Types.ObjectId, ref: 'Review' },
+            ],
         },
         rating: {
             type: Number,
@@ -54,6 +56,7 @@ productSchema.methods.shortResponse = function () {
     delete productObject.createdAt;
     delete productObject.updatedAt;
     delete productObject.__v;
+    delete productObject.reviews;
 
     return productObject;
 };
@@ -65,6 +68,7 @@ productSchema.methods.toJSON = function () {
 
     delete productObject.inStockQuantity;
     delete productObject.__v;
+    delete productObject.reviews.allReviews;
 
     return productObject;
 };
