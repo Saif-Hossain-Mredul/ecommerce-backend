@@ -54,6 +54,16 @@ productSchema.methods.shortResponse = function () {
     return productObject;
 };
 
+productSchema.methods.toJSON = function () {
+    const product = this;
+
+    const productObject = product.toObject();
+
+    delete productObject.inStockQuantity;
+
+    return productObject;
+};
+
 const Product = new mongoose.model('Product', productSchema);
 
 module.exports = Product;
