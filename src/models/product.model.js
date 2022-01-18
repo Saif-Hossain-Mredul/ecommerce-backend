@@ -1,4 +1,3 @@
-const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema(
@@ -22,6 +21,10 @@ const productSchema = new mongoose.Schema(
             type: Number,
         },
         totalPurchase: {
+            type: Number,
+            default: 0,
+        },
+        totalReviews: {
             type: Number,
             default: 0,
         },

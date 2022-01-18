@@ -14,17 +14,23 @@ const getProductById = require('./route-functions/get-product-by-id.rf');
 
 const productRouter = express.Router();
 
-// adds  new product to the database
-productRouter.post('/add-product', addProduct);
-
-// updates a product by a given id
-productRouter.patch('/products/:id', updateProduct);
 
 // get homepage data
 productRouter.get('/products', auth, getHomePageData);
 
 // get a product by id
 productRouter.get('/products/:id', auth, getProductById);
+
+
+/// 
+/// this functions are for using by the admin only 
+///
+
+// adds  new product to the database
+productRouter.post('/add-product', addProduct);
+
+// updates a product by a given id
+productRouter.patch('/products/:id', updateProduct);
 
 const fileUpload = multer({
     limits: {
