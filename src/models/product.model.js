@@ -48,6 +48,8 @@ productSchema.methods.shortResponse = function () {
     delete productObject.totalPurchase;
     delete productObject.displayImages;
     delete productObject.otherImages;
+    delete productObject.createdAt;
+    delete productObject.updatedAt;
 
     return productObject;
 };

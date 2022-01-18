@@ -20,15 +20,15 @@ productRouter.patch('/products/:id', updateProduct);
 
 // get homepage data
 productRouter.get('/products', auth, async (req, res) => {
-    const popular = await Product.find()
+    let popular = await Product.find()
         .sort({
             rating: 'desc',
         })
         .limit(5);
 
-        popular.forEach((product) => {
-            
-        })
+    popular = popular.map((product) => {
+        return product.shortResponse();
+    });
 
     res.send(popular);
 });
