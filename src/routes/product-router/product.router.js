@@ -9,7 +9,8 @@ const Product = require('../../models/product.model');
 const addProduct = require('./route-functions/add-product.rf');
 const updateProduct = require('./route-functions/update-product.rf');
 const imageUpload = require('./route-functions/image-upload.rf');
-const getHomePageData = require('./route-functions/get-homepage-data.rf')
+const getHomePageData = require('./route-functions/get-homepage-data.rf');
+const getProductById = require('./route-functions/get-product-by-id.rf');
 
 const productRouter = express.Router();
 
@@ -21,6 +22,9 @@ productRouter.patch('/products/:id', updateProduct);
 
 // get homepage data
 productRouter.get('/products', auth, getHomePageData);
+
+// get a product by id
+productRouter.get('/products/:id', auth, getProductById);
 
 const fileUpload = multer({
     limits: {

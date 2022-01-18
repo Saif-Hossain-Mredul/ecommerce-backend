@@ -50,6 +50,7 @@ productSchema.methods.shortResponse = function () {
     delete productObject.otherImages;
     delete productObject.createdAt;
     delete productObject.updatedAt;
+    delete productObject.__v;
 
     return productObject;
 };
@@ -60,6 +61,7 @@ productSchema.methods.toJSON = function () {
     const productObject = product.toObject();
 
     delete productObject.inStockQuantity;
+    delete productObject.__v;
 
     return productObject;
 };
