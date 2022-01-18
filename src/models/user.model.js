@@ -84,6 +84,7 @@ const userSchema = new mongoose.Schema(
                 quantity: {
                     type: Number,
                 },
+                reviewed: { type: Boolean },
                 purchasedAt: {
                     type: Date,
                     default: Date.now,
