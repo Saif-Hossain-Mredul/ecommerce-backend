@@ -11,6 +11,7 @@ const signOutUser = require('./route-functions/sign-out-user.rf');
 const getProfile = require('./route-functions/get-profile.rf');
 const uploadCloudinary = require('../product-router/helper-functions/uploadCloudinary.hf');
 const addProfilePicture = require('./route-functions/add-profile-picture.rf');
+const updateUser = require('./route-functions/update-user.rf');
 
 const userRouter = express.Router();
 
@@ -27,35 +28,7 @@ userRouter.post('/sign-out', auth, signOutUser);
 userRouter.get('/profile', auth, getProfile);
 
 // update user profile
-userRouter.patch('/profile', auth, async (req, res) => {
-    try {
-        const { name, password, shippingAddress } = req.body;
-        const user = req.user;
-
-        const allowedUpdates = ['name', 'password', 'shippingAddress'];
-        const requestedUpdates = Object.keys(req.body);
-
-        const isAllowedToUpdate = requestedUpdates.every((updateField) =>
-            allowedUpdates.includes(updateField)
-        );
-
-        if (!isAllowedToUpdate) {
-            throw new Error('Invalid update field.');
-        }
-
-        if (name) user.name = name;
-        if (password) user.password = password;
-        if (shippingAddress) {
-            user.shippingAddress.push({ address: shippingAddress });
-        }
-
-        await user.save();
-
-        res.send(user);
-    } catch (e) {
-        res.status(400).send(e.message);
-    }
-});
+userRouter.patch('/profile', auth, updateUser);
 
 // add image to profile
 userRouter.post(
