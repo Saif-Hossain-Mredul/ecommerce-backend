@@ -16,9 +16,7 @@ const updateUser = async (req, res) => {
 
         if (name) user.name = name;
         if (password) user.password = password;
-        if (shippingAddress) {
-            user.shippingAddress.push({ address: shippingAddress });
-        }
+        if (shippingAddress) user.shippingAddress = shippingAddress;
 
         await user.save();
 

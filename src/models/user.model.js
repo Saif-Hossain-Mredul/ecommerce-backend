@@ -28,13 +28,10 @@ const userSchema = new mongoose.Schema(
                     throw new Error('Password length must be greater than 8');
             },
         },
-        shippingAddress: [
-            {
-                address: {
-                    type: String,
-                },
-            },
-        ],
+        shippingAddress: {
+            type: String,
+        },
+
         tokens: [
             {
                 token: {
