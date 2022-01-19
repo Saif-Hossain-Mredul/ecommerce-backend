@@ -25,6 +25,7 @@ productRouter.get('/products/:id', auth, getProductById);
 
 // get the reviews of a product
 // URL: GET /products/61hfbhukdh853hdk/reviews?skip=5
+
 productRouter.get('/products/:id/reviews', auth, getReviews);
 
 // submit a review

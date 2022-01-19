@@ -66,7 +66,6 @@ productSchema.methods.toJSON = function () {
 
     const productObject = product.toObject();
 
-    delete productObject.inStockQuantity;
     delete productObject.__v;
     delete productObject.reviews.allReviews;
 
