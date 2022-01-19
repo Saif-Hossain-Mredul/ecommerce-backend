@@ -13,6 +13,7 @@ const uploadCloudinary = require('../product-router/helper-functions/uploadCloud
 const addProfilePicture = require('./route-functions/add-profile-picture.rf');
 const updateUser = require('./route-functions/update-user.rf');
 const addToCart = require('./route-functions/add-to-cart.rf');
+const deleteFromCart = require('./route-functions/delete-from-cart.rf');
 
 const userRouter = express.Router();
 
@@ -44,23 +45,7 @@ userRouter.get('/profile/cart', auth, (req, res) => {
 userRouter.patch('/profile/cart', auth, addToCart);
 
 // remove product from cart
-userRouter.delete('/profile/cart', auth, async (req, res) => {
-    const productIndex = req.user.inCart.findIndex((product) => {
-        return product.productId.toString() === req.body.productId;
-    });
-
-    if (req.user.inCart[productIndex].quantity === 1) {
-        req.user.inCart = req.user.inCart.filter(
-            (product) => product.productId.toString() !== req.body.productId
-        );
-    } else {
-        req.user.inCart[productIndex].quantity -= 1;
-    }
-
-    await req.user.save();
-
-    res.send();
-});
+userRouter.delete('/profile/cart', auth, deleteFromCart);
 
 // add image to profile
 userRouter.post(
