@@ -42,6 +42,7 @@ productRouter.post('/add-product', addProduct);
 productRouter.patch('/products/:id', updateProduct);
 
 // upload images for a product
+// URL: GET /products/image-upload/61hfbhukdh853hdk/previewImage or displayImage or otherImage
 productRouter.post(
     '/products/image-upload/:id/:imageField',
     fileUpload.array('images', 5),
