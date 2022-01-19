@@ -3,6 +3,7 @@ const User = require('../../models/user.model');
 
 const auth = require('../../middlewares/auth.middleware');
 const createUser = require('./route-functions/create-user.rf');
+const signInUser = require('./route-functions/signInUser.rf');
 
 const userRouter = express.Router();
 
@@ -10,17 +11,7 @@ const userRouter = express.Router();
 userRouter.post('/sign-up', createUser);
 
 // sign in route
-userRouter.post('/sign-in', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await User.findAndLoginByCredentials({ email, password });
-        const token = await user.generateAuthToken();
-
-        res.send({ user, token });
-    } catch (e) {
-        res.status(401).send(e.message);
-    }
-});
+userRouter.post('/sign-in', signInUser);
 
 // sign-out route
 userRouter.post('/sign-out', auth, async (req, res) => {
