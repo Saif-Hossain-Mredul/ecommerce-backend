@@ -9,6 +9,7 @@ const addProfilePicture = require('./route-functions/add-profile-picture.rf');
 const updateUser = require('./route-functions/update-user.rf');
 const addToCart = require('./route-functions/add-to-cart.rf');
 const deleteFromCart = require('./route-functions/delete-from-cart.rf');
+const getCartProduct = require('./route-functions/get-cart-products.rf');
 
 const userRouter = express.Router();
 
@@ -28,13 +29,7 @@ userRouter.get('/profile', auth, getProfile);
 userRouter.patch('/profile', auth, updateUser);
 
 // get cart products
-userRouter.get('/profile/cart', auth, (req, res) => {
-    try {
-        res.send(req.user.inCart);
-    } catch (e) {
-        res.status(400).send();
-    }
-});
+userRouter.get('/profile/cart', auth, getCartProduct);
 
 // add product to cart
 userRouter.patch('/profile/cart', auth, addToCart);
