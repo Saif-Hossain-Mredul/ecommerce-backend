@@ -1,10 +1,12 @@
-const cloudinary = require('cloudinary').v2;
-const uploadCloudinary = require('./uploadCloudinary.hf');
+const cloudinary = require('cloudinary');
+const uploadCloudinary = require('../../product-router/helper-functions/uploadCloudinary.hf');
 
-const previewImageUploader = async (file, product, imageField) => {
-    if (product.previewImage) {
+const addProfilePicture = async (req, res) => {
+    const { file, user } = req;
+
+    if (user.profilePicture) {
         cloudinary.uploader.destroy(
-            product.previewImage.public_id,
+            user.profilePicture.public_id,
             (error, result) => {
                 console.log('Delete result ', result, error);
             }
@@ -13,16 +15,16 @@ const previewImageUploader = async (file, product, imageField) => {
 
     await uploadCloudinary(
         file,
-        `watches/${product.name}/${imageField}`,
-        [product.name, product.category, product.brand],
-        undefined,
+        `profile-pictures/`,
+        [],
+        user._id,
         async (error, result) => {
             if (error) throw new Error(error.message);
 
             const { public_id, width, height, format, url, secure_url } =
                 result;
 
-            product.previewImage = {
+            user.profilePicture = {
                 public_id,
                 width,
                 height,
@@ -31,13 +33,12 @@ const previewImageUploader = async (file, product, imageField) => {
                 secure_url,
             };
 
-            await product.save();
+            await user.save();
 
-            return 'Uploaded';
+            res.send(user);
+            return;
         }
     );
-
-    return { result: 'Uploaded' };
 };
 
-module.exports = previewImageUploader;
+module.exports = addProfilePicture;

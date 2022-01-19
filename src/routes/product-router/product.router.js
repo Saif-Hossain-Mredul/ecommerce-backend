@@ -1,7 +1,7 @@
 const express = require('express');
-require('../../cloudinary-configure');
 
 const multer = require('multer');
+const fileUpload = require('../../config/multer-config');
 
 const auth = require('../../middlewares/auth.middleware');
 const Product = require('../../models/product.model');
@@ -41,18 +41,9 @@ productRouter.post('/add-product', addProduct);
 // updates a product by a given id
 productRouter.patch('/products/:id', updateProduct);
 
-const fileUpload = multer({
-    limits: {
-        fileSize: 1000000,
-    },
-    fileFilter(req, file, cb) {
-        cb(undefined, true);
-    },
-});
-
 // upload images for a product
 productRouter.post(
-    '/image-upload/:id/:imageField',
+    '/products/image-upload/:id/:imageField',
     fileUpload.array('images', 5),
     imageUpload
 );

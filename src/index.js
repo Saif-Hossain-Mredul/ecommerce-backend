@@ -3,6 +3,7 @@ require('./db/mongoose-connection.db');
 require('./models/review.model');
 require('./models/user.model');
 require('./models/product.model');
+require('./config/cloudinary-config');
 
 const userRouter = require('./routes/user-router/user.router');
 const productRouter = require('./routes/product-router/product.router');

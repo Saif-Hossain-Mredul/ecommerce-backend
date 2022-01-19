@@ -6,6 +6,7 @@ const otherImageUploader = async (files, product, imageField) => {
             file,
             `watches/${product.name}/${imageField}`,
             [product.name, product.category, product.brand],
+            undefined,
             async (error, result) => {
                 if (error) throw new Error(error.message);
 
