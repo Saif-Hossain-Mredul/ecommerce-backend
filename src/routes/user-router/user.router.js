@@ -28,29 +28,33 @@ userRouter.get('/profile', auth, getProfile);
 
 // update user profile
 userRouter.patch('/profile', auth, async (req, res) => {
-    const { name, password, shippingAddress } = req.body;
-    const user = req.user;
+    try {
+        const { name, password, shippingAddress } = req.body;
+        const user = req.user;
 
-    const allowedUpdates = ['name', 'password', 'shippingAddress'];
-    const requestedUpdates = Object.keys(req.body);
+        const allowedUpdates = ['name', 'password', 'shippingAddress'];
+        const requestedUpdates = Object.keys(req.body);
 
-    const isAllowedToUpdate = requestedUpdates.every((updateField) =>
-        allowedUpdates.includes(updateField)
-    );
+        const isAllowedToUpdate = requestedUpdates.every((updateField) =>
+            allowedUpdates.includes(updateField)
+        );
 
-    if (!isAllowedToUpdate) {
-        throw new Error('Invalid update field.');
+        if (!isAllowedToUpdate) {
+            throw new Error('Invalid update field.');
+        }
+
+        if (name) user.name = name;
+        if (password) user.password = password;
+        if (shippingAddress) {
+            user.shippingAddress.push({ address: shippingAddress });
+        }
+
+        await user.save();
+
+        res.send(user);
+    } catch (e) {
+        res.status(400).send(e.message);
     }
-
-    if (name) user.name = name;
-    if (password) user.password = password;
-    if (shippingAddress) {
-        user.shippingAddress.push({ address: shippingAddress });
-    }
-
-    await user.save();
-
-    res.send(user);
 });
 
 // add image to profile
