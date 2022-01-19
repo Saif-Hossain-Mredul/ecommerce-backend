@@ -39,6 +39,23 @@ userRouter.get('/profile/cart', auth, (req, res) => {
     }
 });
 
+// add product to cart
+userRouter.patch('/profile/cart', auth, async (req, res) => {
+    const productIndex = req.user.inCart.findIndex((product) => {
+        return product.productId.toString() === req.body.productId;
+    });
+
+    if (productIndex === -1) {
+        req.user.inCart.push({ ...req.body });
+    } else {
+        req.user.inCart[productIndex].quantity += 1;
+    }
+
+    await req.user.save();
+
+    res.send();
+});
+
 // add image to profile
 userRouter.post(
     '/profile/add-profile-picture',

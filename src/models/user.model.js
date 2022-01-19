@@ -55,6 +55,7 @@ const userSchema = new mongoose.Schema(
                 },
                 quantity: {
                     type: Number,
+                    default:1
                 },
                 addedAt: {
                     type: Date,
@@ -63,7 +64,7 @@ const userSchema = new mongoose.Schema(
                 updatedAt: {
                     type: Date,
                     default: Date.now,
-                },
+                }
             },
         ],
         purchasedProducts: [
