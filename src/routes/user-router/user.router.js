@@ -5,6 +5,7 @@ const auth = require('../../middlewares/auth.middleware');
 const createUser = require('./route-functions/create-user.rf');
 const signInUser = require('./route-functions/sign-in-user.rf');
 const signOutUser = require('./route-functions/sign-out-user.rf');
+const getProfile = require('./route-functions/get-profile.rf');
 
 const userRouter = express.Router();
 
@@ -18,12 +19,6 @@ userRouter.post('/sign-in', signInUser);
 userRouter.post('/sign-out', auth, signOutUser);
 
 //get profile
-userRouter.get('/profile', auth, async (req, res) => {
-    try {
-        res.send(req.user);
-    } catch (e) {
-        res.status(500).send(e.message);
-    }
-});
+userRouter.get('/profile', auth, getProfile);
 
 module.exports = userRouter;
