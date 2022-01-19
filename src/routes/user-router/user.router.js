@@ -30,6 +30,15 @@ userRouter.get('/profile', auth, getProfile);
 // update user profile
 userRouter.patch('/profile', auth, updateUser);
 
+// get cart products
+userRouter.get('/profile/cart', auth, (req, res) => {
+    try {
+        res.send(req.user.inCart);
+    } catch (e) {
+        res.status(400).send();
+    }
+});
+
 // add image to profile
 userRouter.post(
     '/profile/add-profile-picture',
