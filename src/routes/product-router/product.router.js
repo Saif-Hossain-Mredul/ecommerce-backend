@@ -14,6 +14,7 @@ const getHomePageData = require('./route-functions/get-homepage-data.rf');
 const getProductById = require('./route-functions/get-product-by-id.rf');
 const submitReview = require('./route-functions/submit-review.rf');
 const getReviews = require('./route-functions/get-reviews.rf');
+const queryProducts = require('./route-functions/query-products.rf');
 
 const productRouter = express.Router();
 
@@ -26,24 +27,7 @@ productRouter.get('/products/:id', auth, getProductById);
 // query products
 // URL: GET /products?category=MENS
 // URL: GET /products?brand=timex&sortBy=price/name&order=asc&skip=5
-productRouter.get('/products', auth, async (req, res) => {
-    try {
-        const queries = req.query;
-
-        let products = await Product.find({ ...queries })
-            .sort({
-                [queries.sortBy]: queries.order,
-            })
-            .skip(parseInt(queries.skip))
-            .limit(5);
-
-        products = products.map((product) => product.shortResponse());
-
-        res.send(products);
-    } catch (e) {
-        res.status(500).send();
-    }
-});
+productRouter.get('/products', auth, queryProducts);
 
 // get the reviews of a product
 // URL: GET /products/61hfbhukdh853hdk/reviews?skip=5
