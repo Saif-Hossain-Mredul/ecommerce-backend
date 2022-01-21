@@ -1,5 +1,7 @@
 const express = require('express');
 
+const fileUpload = require('../../config/multer-config')
+
 const auth = require('../../middlewares/auth.middleware');
 const createUser = require('./route-functions/create-user.rf');
 const signInUser = require('./route-functions/sign-in-user.rf');

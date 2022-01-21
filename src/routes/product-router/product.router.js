@@ -25,8 +25,8 @@ productRouter.get('/products/:id', auth, getProductById);
 
 // query products
 // URL: GET /products?category=MENS
-// URL: GET /products?brand=timex&sortBy=price/name&order=asc
-productRouter.get('/products')
+// URL: GET /products?brand=timex&sortBy=price/name&order=asc&skip=5
+productRouter.get('/products', auth, )
 
 // get the reviews of a product
 // URL: GET /products/61hfbhukdh853hdk/reviews?skip=5
