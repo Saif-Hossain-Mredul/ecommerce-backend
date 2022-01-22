@@ -15,7 +15,7 @@ const submitReview = async (req, res) => {
         });
 
         product.reviews.allReviews.push(review._id);
-        product.reviews.count = product.reviews.count + 1;
+        product.reviews.count += 1;
 
         await review.save();
         await product.save();
