@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 var jwt = require('jsonwebtoken');
 const SecretKeys = require('../secret-keys');
+const { type } = require('express/lib/response');
 
 const userSchema = new mongoose.Schema(
     {
@@ -41,6 +42,7 @@ const userSchema = new mongoose.Schema(
             },
         ],
         profilePicture: { type: Object },
+        whishList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
         inCart: [
             {
                 productId: {
@@ -55,7 +57,7 @@ const userSchema = new mongoose.Schema(
                 },
                 quantity: {
                     type: Number,
-                    default:1
+                    default: 1,
                 },
                 addedAt: {
                     type: Date,
@@ -64,7 +66,7 @@ const userSchema = new mongoose.Schema(
                 updatedAt: {
                     type: Date,
                     default: Date.now,
-                }
+                },
             },
         ],
         purchasedProducts: [

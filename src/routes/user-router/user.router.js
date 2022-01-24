@@ -39,6 +39,15 @@ userRouter.patch('/profile/cart', auth, addToCart);
 // remove product from cart
 userRouter.delete('/profile/cart', auth, deleteFromCart);
 
+// add product ot whish-list
+userRouter.patch('profile/whish-list', auth, async (req, res) => {
+    
+})
+
+// remove product from whish-list
+
+// get whishlist products
+
 // add image to profile
 userRouter.post(
     '/profile/add-profile-picture',
