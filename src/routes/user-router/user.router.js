@@ -14,6 +14,7 @@ const deleteFromCart = require('./route-functions/delete-from-cart.rf');
 const getCartProduct = require('./route-functions/get-cart-products.rf');
 const addToWishlist = require('./route-functions/add-to-wishlist.rf');
 const deleteFromWishlist = require('./route-functions/delete-from-wishlist.rf');
+const getWishlist = require('./route-functions/get-wishlist.rf');
 
 const userRouter = express.Router();
 
@@ -50,27 +51,7 @@ userRouter.patch('/profile/wishlist', auth, addToWishlist);
 userRouter.delete('/profile/wishlist', auth, deleteFromWishlist);
 
 // get wishlist products
-userRouter.get('/profile/wishlist', auth, async (req, res) => {
-    try {
-        const user = req.user;
-
-        await user.populate({
-            path: 'wishList',
-            options: {
-                limit: 10,
-                skip: parseInt(req.query.skip),
-            },
-        });
-
-        const wishList = user.wishList.map((product) =>
-            product.shortResponse()
-        );
-
-        res.send(wishList);
-    } catch (e) {
-        res.send(400).send();
-    }
-});
+userRouter.get('/profile/wishlist', auth, getWishlist);
 
 // add image to profile
 userRouter.post(
