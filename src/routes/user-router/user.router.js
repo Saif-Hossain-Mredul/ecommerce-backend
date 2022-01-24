@@ -13,6 +13,7 @@ const addToCart = require('./route-functions/add-to-cart.rf');
 const deleteFromCart = require('./route-functions/delete-from-cart.rf');
 const getCartProduct = require('./route-functions/get-cart-products.rf');
 const addToWishlist = require('./route-functions/add-to-wishlist.rf');
+const deleteFromWishlist = require('./route-functions/delete-from-wishlist.rf');
 
 const userRouter = express.Router();
 
@@ -46,20 +47,7 @@ userRouter.patch('/profile/wishlist', auth, addToWishlist);
 
 // remove product from whish-list
 // {"productId": "507f1f77bcf86cd799439011"}
-userRouter.delete('/profile/wishlist', auth, async (req, res) => {
-    try {
-        const user = req.user;
-
-        const index = user.wishList.indexOf(req.body.productId);
-        index > -1 ? user.wishList.splice(index, 1) : false;
-
-        await user.save();
-
-        res.send();
-    } catch (e) {
-        res.status(400).send();
-    }
-});
+userRouter.delete('/profile/wishlist', auth, deleteFromWishlist);
 
 // get wishlist products
 
