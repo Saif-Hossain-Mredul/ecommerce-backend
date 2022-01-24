@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
             },
         ],
         profilePicture: { type: Object },
-        whishList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+        wishList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
         inCart: [
             {
                 productId: {

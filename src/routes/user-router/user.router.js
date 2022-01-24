@@ -1,6 +1,6 @@
 const express = require('express');
 
-const fileUpload = require('../../config/multer-config')
+const fileUpload = require('../../config/multer-config');
 
 const auth = require('../../middlewares/auth.middleware');
 const createUser = require('./route-functions/create-user.rf');
@@ -39,14 +39,27 @@ userRouter.patch('/profile/cart', auth, addToCart);
 // remove product from cart
 userRouter.delete('/profile/cart', auth, deleteFromCart);
 
-// add product ot whish-list
-userRouter.patch('profile/whish-list', auth, async (req, res) => {
-    
-})
+// add product to wishlist, sample request:
+// {"productId": "507f1f77bcf86cd799439011"}
+userRouter.patch('/profile/wishlist', auth, async (req, res) => {
+    try {
+        const user = req.user;
+
+        if (!user.wishList.includes(req.body.productId)) {
+            user.wishList.push(req.body.productId);
+        }
+
+        await user.save();
+
+        res.send();
+    } catch (e) {
+        res.status(400).send();
+    }
+});
 
 // remove product from whish-list
 
-// get whishlist products
+// get wishlist products
 
 // add image to profile
 userRouter.post(
