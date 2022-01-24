@@ -1,10 +1,6 @@
 const express = require('express');
 
-const multer = require('multer');
 const fileUpload = require('../../config/multer-config');
-
-const Product = require('../../models/product.model');
-const Review = require('../../models/review.model');
 
 const auth = require('../../middlewares/auth.middleware');
 const addProduct = require('./route-functions/add-product.rf');
