@@ -27,10 +27,10 @@ productRouter.get('/products/:id', auth, getProductById);
 // query products
 // URL: GET /products?category=MENS
 // URL: GET /products?brand=timex&sortBy=price/name&order=asc&skip=5
+// URL: GET /products?brand=Timex&sortBy=rating&order=asc&category=MENS&skip=2
 productRouter.get('/products', auth, queryProducts);
 
 // get the reviews of a product
-// URL: GET /products?brand=Timex&sortBy=rating&order=asc&category=MENS&skip=2
 productRouter.get('/products/:id/reviews', auth, getReviews);
 
 // submit a review
