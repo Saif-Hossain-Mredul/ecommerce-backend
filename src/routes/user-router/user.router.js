@@ -12,6 +12,7 @@ const updateUser = require('./route-functions/update-user.rf');
 const addToCart = require('./route-functions/add-to-cart.rf');
 const deleteFromCart = require('./route-functions/delete-from-cart.rf');
 const getCartProduct = require('./route-functions/get-cart-products.rf');
+const addToWishlist = require('./route-functions/add-to-wishlist.rf');
 
 const userRouter = express.Router();
 
@@ -41,7 +42,7 @@ userRouter.delete('/profile/cart', auth, deleteFromCart);
 
 // add product to wishlist, sample request:
 // {"productId": "507f1f77bcf86cd799439011"}
-userRouter.patch('/profile/wishlist', auth, );
+userRouter.patch('/profile/wishlist', auth, addToWishlist);
 
 // remove product from whish-list
 
