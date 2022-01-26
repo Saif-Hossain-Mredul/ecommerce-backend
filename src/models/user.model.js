@@ -2,8 +2,6 @@ const bcryptjs = require('bcryptjs');
 const mongoose = require('mongoose');
 const validator = require('validator');
 var jwt = require('jsonwebtoken');
-const SecretKeys = require('../secret-keys');
-const { type } = require('express/lib/response');
 
 const userSchema = new mongoose.Schema(
     {
