@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectionURL = 'mongodb://127.0.0.1:27017/ecommerce-api';
+const connectionURL = process.env.MONGODB_URL;
 
 const connection = mongoose.connect(connectionURL, () => {
     console.log('Connected to db')
