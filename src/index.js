@@ -16,6 +16,14 @@ app.use(express.json());
 app.use(userRouter);
 app.use(productRouter);
 
+app.get('/', (req, res) => {
+    res.send();
+});
+
+app.get('*', (req, res) => {
+    res.send('Page not found.');
+});
+
 app.listen(port, () => {
     console.log('Connected to port ' + port);
 });
