@@ -1,5 +1,4 @@
 const cloudinary = require('cloudinary').v2;
-const SecretKeys = require('../secret-keys');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
