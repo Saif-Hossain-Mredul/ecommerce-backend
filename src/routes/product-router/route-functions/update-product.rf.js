@@ -8,6 +8,7 @@ const updateProduct = async (req, res) => {
         'brand',
         'specification',
         'price',
+        'inStockQuantity'
     ];
     const isAllowedToUpdate = requestedUpdates.every((update) =>
         allowedUpdates.includes(update)
