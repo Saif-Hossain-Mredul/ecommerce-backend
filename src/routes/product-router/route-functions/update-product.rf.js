@@ -1,22 +1,24 @@
 const Product = require('../../../models/product.model');
 
 const updateProduct = async (req, res) => {
-    const requestedUpdates = Object.keys(req.body);
     const allowedUpdates = [
         'name',
         'category',
+        'inStockQuantity',
         'brand',
+        'description',
         'specification',
         'price',
-        'inStockQuantity'
     ];
-    const isAllowedToUpdate = requestedUpdates.every((update) =>
-        allowedUpdates.includes(update)
-    );
-
-    if (!isAllowedToUpdate) throw new Error('Invalid Update field.');
-
     try {
+        const requestedUpdates = Object.keys(req.body);
+
+        const isAllowedToUpdate = requestedUpdates.every((update) =>
+            allowedUpdates.includes(update)
+        );
+
+        if (!isAllowedToUpdate) throw new Error('Invalid Update field.');
+
         const product = await Product.findById({ _id: req.params.id });
 
         if (!product) throw new Error('Can not find product.');
