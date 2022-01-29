@@ -3,7 +3,6 @@ const User = require('../../../models/user.model');
 const createUser = async (req, res) => {
     const { email, password } = req.body;
 
-    console.log(req.body);
     try {
         if (!email || !password) {
             throw new Error('Email and password is required to create an user');

@@ -8,7 +8,7 @@ const signInUser = async (req, res) => {
 
         res.send({ user, token });
     } catch (e) {
-        res.status(401).send(e.message);
+        res.status(401).send({ error: { status: 401, message: e.message } });
     }
 };
 
