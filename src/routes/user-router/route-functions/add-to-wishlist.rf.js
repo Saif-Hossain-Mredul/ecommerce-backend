@@ -8,7 +8,7 @@ const addToWishlist = async (req, res) => {
 
         await user.save();
 
-        res.status(204).send();
+        res.status(200).send({result: 'Product added to wishlist'});
     } catch (e) {
         res.status(400).send({ error: { status: 409, message: e.message } });
     }

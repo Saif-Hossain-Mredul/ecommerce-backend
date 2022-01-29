@@ -51,6 +51,7 @@ userRouter.patch('/profile/wishlist', auth, addToWishlist);
 userRouter.delete('/profile/wishlist', auth, deleteFromWishlist);
 
 // get wishlist products
+// Must include skip count in the url  ---> ?skip=10
 userRouter.get('/profile/wishlist', auth, getWishlist);
 
 // add image to profile
