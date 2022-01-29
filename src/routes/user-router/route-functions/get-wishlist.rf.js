@@ -16,7 +16,7 @@ const getWishlist = async (req, res) => {
 
         res.send(wishList);
     } catch (e) {
-        res.send(400).send({ error: { status: 400, message: e.message } });
+        res.status(400).send({ error: { status: 400, message: e.message } });
     }
 };
 
