@@ -60,6 +60,7 @@ productSchema.methods.shortResponse = function () {
     delete productObject.updatedAt;
     delete productObject.__v;
     delete productObject.reviews;
+    delete productObject.description;
 
     return productObject;
 };
