@@ -4,41 +4,45 @@ const uploadCloudinary = require('../../product-router/helper-functions/uploadCl
 const addProfilePicture = async (req, res) => {
     const { file, user } = req;
 
-    if (user.profilePicture) {
-        cloudinary.uploader.destroy(
-            user.profilePicture.public_id,
-            (error, result) => {
-                console.log('Delete result ', result, error);
+    try {
+        if (user.profilePicture) {
+            cloudinary.uploader.destroy(
+                user.profilePicture.public_id,
+                (error, result) => {
+                    console.log('Delete result ', result, error);
+                }
+            );
+        }
+
+        await uploadCloudinary(
+            file,
+            `profile-pictures/`,
+            [],
+            user._id,
+            async (error, result) => {
+                if (error) throw new Error(error.message);
+
+                const { public_id, width, height, format, url, secure_url } =
+                    result;
+
+                user.profilePicture = {
+                    public_id,
+                    width,
+                    height,
+                    format,
+                    url,
+                    secure_url,
+                };
+
+                await user.save();
+
+                res.send(user);
+                return;
             }
         );
+    } catch (e) {
+        res.status(400).send({ error: { status: 400, message: e.message } });
     }
-
-    await uploadCloudinary(
-        file,
-        `profile-pictures/`,
-        [],
-        user._id,
-        async (error, result) => {
-            if (error) throw new Error(error.message);
-
-            const { public_id, width, height, format, url, secure_url } =
-                result;
-
-            user.profilePicture = {
-                public_id,
-                width,
-                height,
-                format,
-                url,
-                secure_url,
-            };
-
-            await user.save();
-
-            res.send(user);
-            return;
-        }
-    );
 };
 
 module.exports = addProfilePicture;
