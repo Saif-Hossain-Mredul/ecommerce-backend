@@ -6,7 +6,7 @@ const signOutUser = async (req, res) => {
 
         res.send();
     } catch (e) {
-        res.status(500).send();
+        res.status(500).send({ error: { status: 500, message: e.message } });
     }
 };
 
