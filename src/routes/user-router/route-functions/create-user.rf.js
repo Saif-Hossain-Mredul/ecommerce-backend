@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
 
         res.status(201).send({ user, token });
     } catch (e) {
-        res.status(409).send(e.message);
+        res.status(409).send({ error: { status: 409, message: e.message } });
     }
 };
 
