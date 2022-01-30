@@ -24,6 +24,16 @@ const reviewSchema = new mongoose.Schema(
     }
 );
 
+reviewSchema.methods.toJSON = function() {
+    const review = this;
+
+    const reviewObject = review.toObject();
+
+    delete reviewObject.__v
+
+    return reviewObject;
+}
+
 const Review = new mongoose.model('Review', reviewSchema);
 
 module.exports = Review;

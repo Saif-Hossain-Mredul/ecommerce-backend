@@ -27,6 +27,7 @@ productRouter.get('/products/:id', auth, getProductById);
 productRouter.get('/products', auth, queryProducts);
 
 // get the reviews of a product
+// Must include 'skip' query in url
 productRouter.get('/products/:id/reviews', auth, getReviews);
 
 // submit a review
