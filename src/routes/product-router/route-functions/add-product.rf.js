@@ -8,7 +8,7 @@ const addProduct = async (req, res) => {
 
         res.status(201).send(product);
     } catch (e) {
-        res.status(409).send();
+        res.status(409).send({ error: { status: 409, message: e.message } });
     }
 };
 
