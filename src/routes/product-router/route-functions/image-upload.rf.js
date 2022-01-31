@@ -40,6 +40,7 @@ const imageUpload = async (req, res) => {
     } catch (e) {
         res.status(409).send({ error: { status: 409, message: e.message } });
     }
+    
 };
 
 module.exports = imageUpload;
