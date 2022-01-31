@@ -38,7 +38,7 @@ const imageUpload = async (req, res) => {
             throw new Error('Invalid field.');
         }
     } catch (e) {
-        res.status(409).send(e);
+        res.status(409).send({ error: { status: 409, message: e.message } });
     }
 };
 
