@@ -31,7 +31,7 @@ const updateProduct = async (req, res) => {
 
         res.send(product);
     } catch (e) {
-        res.status(400).send(e.message);
+        res.status(400).send({ error: { status: 400, message: e.message } });
     }
 };
 
