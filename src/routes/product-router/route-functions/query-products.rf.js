@@ -15,7 +15,7 @@ const queryProducts = async (req, res) => {
 
         res.send(products);
     } catch (e) {
-        res.status(500).send();
+        res.status(500).send({ error: { status: 500, message: e.message } });
     }
 };
 
