@@ -17,7 +17,7 @@ const getReviews = async (req, res) => {
 
         res.send(product.reviews);
     } catch (e) {
-        res.status(400).send(e.message);
+        res.status(400).send({ error: { status: 400, message: e.message } });
     }
 };
 
