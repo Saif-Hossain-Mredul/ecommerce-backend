@@ -20,15 +20,15 @@ const getHomePageData = async (req, res) => {
 
         newest = newest.map((product) => product.shortResponse());
 
-        let mostBought = await Product.find()
+        let bestSeller = await Product.find()
             .sort({
                 totalPurchase: 'desc',
             })
             .limit(5);
 
-        mostBought = mostBought.map((product) => product.shortResponse());
+            bestSeller = bestSeller.map((product) => product.shortResponse());
 
-        res.send({ popular, newest, mostBought });
+        res.send({ popular, newest, bestSeller });
     } catch (e) {
         res.status(400).send({ error: { status: 400, message: e.message } })
     }
