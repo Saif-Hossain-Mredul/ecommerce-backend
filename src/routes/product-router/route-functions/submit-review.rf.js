@@ -17,6 +17,19 @@ const submitReview = async (req, res) => {
         product.reviews.allReviews.push(review._id);
         product.reviews.count += 1;
 
+        var rating = parseFloat(product.rating);
+
+        if (rating === parseFloat(0)) {
+            product.rating = req.body.rating.toString();
+        } else {
+            product.rating = (
+                (parseFloat(product.rating) + parseFloat(req.body.rating)) /
+                2
+            )
+                .toFixed(1)
+                .toString();
+        }
+
         await review.save();
         await product.save();
 
