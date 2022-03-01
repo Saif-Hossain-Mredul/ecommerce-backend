@@ -10,7 +10,7 @@ const getReviews = async (req, res) => {
         await product.populate({
             path: 'reviews.allReviews',
             options: {
-                limit: 10,
+                limit: 5,
                 skip: parseInt(skip),
             },
         });
