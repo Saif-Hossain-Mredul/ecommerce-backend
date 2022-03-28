@@ -9,7 +9,7 @@ const queryProducts = async (req, res) => {
                 [queries.sortBy]: queries.order,
             })
             .skip(parseInt(queries.skip))
-            .limit(5);
+            .limit(10);
 
         products = products.map((product) => product.shortResponse());
 
