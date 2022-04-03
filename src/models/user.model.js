@@ -78,7 +78,7 @@ const userSchema = new mongoose.Schema(
                 },
                 productName: {
                     type: String,
-                    required: true,
+                    // required: true,
                 },
                 price: {
                     type: Number,
