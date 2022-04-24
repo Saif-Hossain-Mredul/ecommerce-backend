@@ -15,6 +15,7 @@ const getCartProduct = require('./route-functions/get-cart-products.rf');
 const addToWishlist = require('./route-functions/add-to-wishlist.rf');
 const deleteFromWishlist = require('./route-functions/delete-from-wishlist.rf');
 const getWishlist = require('./route-functions/get-wishlist.rf');
+const confirmOrder = require('./route-functions/confirm-order.rf')
 
 const userRouter = express.Router();
 

@@ -23,3 +23,5 @@ const confirmOrder = async (req, res) => {
         res.status(400).send({ error: { status: 400, message: e.message } });
     }
 };
+
+module.exports = confirmOrder;
