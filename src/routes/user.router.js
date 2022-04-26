@@ -1,21 +1,21 @@
 const express = require('express');
 
-const fileUpload = require('../../config/multer-config');
+const fileUpload = require('../config/multer-config');
 
-const auth = require('../../middlewares/auth.middleware');
-const createUser = require('./controllers/create-user.rf');
-const signInUser = require('./controllers/sign-in-user.rf');
-const signOutUser = require('./controllers/sign-out-user.rf');
-const getProfile = require('./controllers/get-profile.rf');
-const addProfilePicture = require('./controllers/add-profile-picture.rf');
-const updateUser = require('./controllers/update-user.rf');
-const addToCart = require('./controllers/add-to-cart.rf');
-const deleteFromCart = require('./controllers/delete-from-cart.rf');
-const getCartProduct = require('./controllers/get-cart-products.rf');
-const addToWishlist = require('./controllers/add-to-wishlist.rf');
-const deleteFromWishlist = require('./controllers/delete-from-wishlist.rf');
-const getWishlist = require('./controllers/get-wishlist.rf');
-const confirmOrder = require('./controllers/confirm-order.rf')
+const auth = require('../middlewares/auth.middleware');
+const createUser = require('../controllers/user-controllers/create-user.rf');
+const signInUser = require('../controllers/user-controllers/sign-in-user.rf');
+const signOutUser = require('../controllers/user-controllers/sign-out-user.rf');
+const getProfile = require('../controllers/user-controllers/get-profile.rf');
+const addProfilePicture = require('../controllers/user-controllers/add-profile-picture.rf');
+const updateUser = require('../controllers/user-controllers/update-user.rf');
+const addToCart = require('../controllers/user-controllers/add-to-cart.rf');
+const deleteFromCart = require('../controllers/user-controllers/delete-from-cart.rf');
+const getCartProduct = require('../controllers/user-controllers/get-cart-products.rf');
+const addToWishlist = require('../controllers/user-controllers/add-to-wishlist.rf');
+const deleteFromWishlist = require('../controllers/user-controllers/delete-from-wishlist.rf');
+const getWishlist = require('../controllers/user-controllers/get-wishlist.rf');
+const confirmOrder = require('../controllers/user-controllers/confirm-order.rf')
 
 const userRouter = express.Router();
 

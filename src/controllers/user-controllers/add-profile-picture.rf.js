@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary');
-const uploadCloudinary = require('../../../lib/helper-functions/uploadCloudinary.hf');
+const uploadCloudinary = require('../../lib/helper-functions/uploadCloudinary.hf');
 
 const addProfilePicture = async (req, res) => {
     const { file, user } = req;

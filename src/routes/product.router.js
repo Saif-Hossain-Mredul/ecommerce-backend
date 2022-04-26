@@ -1,16 +1,16 @@
 const express = require('express');
 
-const fileUpload = require('../../config/multer-config');
+const fileUpload = require('../config/multer-config');
 
-const auth = require('../../middlewares/auth.middleware');
-const addProduct = require('./route-functions/add-product.rf');
-const updateProduct = require('./route-functions/update-product.rf');
-const imageUpload = require('./route-functions/image-upload.rf');
-const getHomePageData = require('./route-functions/get-homepage-data.rf');
-const getProductById = require('./route-functions/get-product-by-id.rf');
-const submitReview = require('./route-functions/submit-review.rf');
-const getReviews = require('./route-functions/get-reviews.rf');
-const queryProducts = require('./route-functions/query-products.rf');
+const auth = require('../middlewares/auth.middleware');
+const addProduct = require('../controllers/product-controllers/add-product.rf');
+const updateProduct = require('../controllers/product-controllers/update-product.rf');
+const imageUpload = require('../controllers/product-controllers/image-upload.rf');
+const getHomePageData = require('../controllers/product-controllers/get-homepage-data.rf');
+const getProductById = require('../controllers/product-controllers/get-product-by-id.rf');
+const submitReview = require('../controllers/product-controllers/submit-review.rf');
+const getReviews = require('../controllers/product-controllers/get-reviews.rf');
+const queryProducts = require('../controllers/product-controllers/query-products.rf');
 
 const productRouter = express.Router();
 

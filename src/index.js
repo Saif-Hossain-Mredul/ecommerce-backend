@@ -5,8 +5,8 @@ require('./models/user.model');
 require('./models/product.model');
 require('./config/cloudinary-config');
 
-const userRouter = require('./routes/user-router/user.router');
-const productRouter = require('./routes/product-router/product.router');
+const userRouter = require('./routes/user.router');
+const productRouter = require('./routes/product.router');
 
 const app = express();
 const port = process.env.PORT;

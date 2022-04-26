@@ -1,5 +1,5 @@
-const Product = require('../../../models/product.model');
-const Review = require('../../../models/review.model');
+const Product = require('../../models/product.model');
+const Review = require('../../models/review.model');
 
 const submitReview = async (req, res) => {
     try {

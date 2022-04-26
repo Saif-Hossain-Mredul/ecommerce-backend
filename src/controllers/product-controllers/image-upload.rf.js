@@ -1,7 +1,7 @@
-const Product = require('../../../models/product.model');
-const previewImageUploader = require('../helper-functions/previewImageUploader.hf');
-const displayImageUploader = require('../helper-functions/displayImageUploader.hf');
-const otherImageUploader = require('../helper-functions/otherImageUploader.hf');
+const Product = require('../../models/product.model');
+const previewImageUploader = require('../../lib/helper-functions/previewImageUploader.hf');
+const displayImageUploader = require('../../lib/helper-functions/displayImageUploader.hf');
+const otherImageUploader = require('../../lib/helper-functions/otherImageUploader.hf');
 
 const imageUpload = async (req, res) => {
     try {
