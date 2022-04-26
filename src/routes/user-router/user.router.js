@@ -3,19 +3,19 @@ const express = require('express');
 const fileUpload = require('../../config/multer-config');
 
 const auth = require('../../middlewares/auth.middleware');
-const createUser = require('./route-functions/create-user.rf');
-const signInUser = require('./route-functions/sign-in-user.rf');
-const signOutUser = require('./route-functions/sign-out-user.rf');
-const getProfile = require('./route-functions/get-profile.rf');
-const addProfilePicture = require('./route-functions/add-profile-picture.rf');
-const updateUser = require('./route-functions/update-user.rf');
-const addToCart = require('./route-functions/add-to-cart.rf');
-const deleteFromCart = require('./route-functions/delete-from-cart.rf');
-const getCartProduct = require('./route-functions/get-cart-products.rf');
-const addToWishlist = require('./route-functions/add-to-wishlist.rf');
-const deleteFromWishlist = require('./route-functions/delete-from-wishlist.rf');
-const getWishlist = require('./route-functions/get-wishlist.rf');
-const confirmOrder = require('./route-functions/confirm-order.rf')
+const createUser = require('./controllers/create-user.rf');
+const signInUser = require('./controllers/sign-in-user.rf');
+const signOutUser = require('./controllers/sign-out-user.rf');
+const getProfile = require('./controllers/get-profile.rf');
+const addProfilePicture = require('./controllers/add-profile-picture.rf');
+const updateUser = require('./controllers/update-user.rf');
+const addToCart = require('./controllers/add-to-cart.rf');
+const deleteFromCart = require('./controllers/delete-from-cart.rf');
+const getCartProduct = require('./controllers/get-cart-products.rf');
+const addToWishlist = require('./controllers/add-to-wishlist.rf');
+const deleteFromWishlist = require('./controllers/delete-from-wishlist.rf');
+const getWishlist = require('./controllers/get-wishlist.rf');
+const confirmOrder = require('./controllers/confirm-order.rf')
 
 const userRouter = express.Router();
 
