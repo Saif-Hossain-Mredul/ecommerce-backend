@@ -26,11 +26,11 @@ const getHomePageData = async (req, res) => {
             })
             .limit(5);
 
-            bestSeller = bestSeller.map((product) => product.shortResponse());
+        bestSeller = bestSeller.map((product) => product.shortResponse());
 
         res.send({ popular, newest, bestSeller });
     } catch (e) {
-        res.status(400).send({ error: { status: 400, message: e.message } })
+        res.status(400).send({ error: { status: 400, message: e.message } });
     }
 };
 
