@@ -110,7 +110,6 @@ userSchema.methods.toJSON = function () {
     delete userObject.updatedAt;
     delete userObject.inCart;
     delete userObject.purchasedProducts;
-    delete userObject.wishList;
 
     return userObject;
 };
